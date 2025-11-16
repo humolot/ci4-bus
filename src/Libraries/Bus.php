@@ -1,14 +1,14 @@
 <?php
 
-namespace App\Libraries;
+namespace Humolot\Bus;
 
-use App\Models\JobModel;
+use Humolot\Bus\Models\JobModel;
 use DateTime;
 
 class Bus
 {
     /**
-     * Dispatch a job to the job bus.
+     * Dispatch a job to the Job Bus.
      */
     public static function dispatch(string $jobClass, array $payload = [], int $delaySeconds = 0): int
     {

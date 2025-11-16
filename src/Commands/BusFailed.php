@@ -1,8 +1,8 @@
 <?php
 
-namespace App\Commands;
+namespace Humolot\Bus\Commands;
 
-use App\Models\FailedJobModel;
+use Humolot\Bus\Models\FailedJobModel;
 use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
 

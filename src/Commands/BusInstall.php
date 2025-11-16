@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Commands;
+namespace Humolot\Bus\Commands;
 
 use CodeIgniter\CLI\BaseCommand;
 use CodeIgniter\CLI\CLI;
