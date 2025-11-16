@@ -1,17 +1,11 @@
 # CodeIgniter 4 Job Bus  
-A full-featured asynchronous Job Bus and Queue Worker system for CodeIgniter 4 — similar to Laravel Queues & Horizon, but designed specifically for CI4.
+A full-featured asynchronous Job Bus and Queue Worker system for CodeIgniter 4 — similar to Laravel Queues & Horizon, but built specifically for CI4.
 
-This package provides a clean, scalable, production-ready job processing system with:
-- Job dispatching
-- Delayed jobs
-- Automatic retries
-- Failed job handling
-- Custom worker
-- PM2/Supervisor support
-- Job generators
-- CLI tools
-- Configurable behavior
-- Perfect for heavy background processing (CSV import, emails, PDFs, API jobs, etc.)
+Now installable via Composer:
+
+```
+composer require humolot/ci4-bus
+```
 
 ## ✨ Features
 
@@ -28,7 +22,11 @@ This package provides a clean, scalable, production-ready job processing system 
 
 ## 📦 Installation
 
-Run the installer:
+```
+composer require humolot/ci4-bus
+```
+
+Run installer:
 
 ```
 php spark bus:install
@@ -70,7 +68,7 @@ Generate:
 php spark bus:make SendEmailJob
 ```
 
-Your job will look like:
+Your job:
 
 ```
 namespace App\Jobs;
@@ -84,7 +82,15 @@ class SendEmailJob extends BaseJob
 }
 ```
 
-## 🚀 Dispatching Jobs
+## 🚀 Using the Package (Correct Path via Composer)
+
+Import the Bus class from vendor:
+
+```
+use Humolot\Bus\Bus;
+
+Bus::dispatch(\App\Jobs\SendEmailJob::class, ['id' => 10]);
+```
 
 ### Dispatch immediately
 
@@ -113,15 +119,13 @@ Bus::bulk([
 
 ## 🧵 Running the Worker
 
-Start processing jobs:
-
 ```
 php spark bus:work
 ```
 
 ## 🔥 Production Worker Setup
 
-### PM2 (recommended)
+### PM2
 
 ```
 npm install pm2 -g
@@ -130,9 +134,7 @@ pm2 save
 pm2 startup
 ```
 
-### Supervisor (Linux)
-
-Create `/etc/supervisor/conf.d/ci4_bus.conf`:
+### Supervisor
 
 ```
 [program:ci4_bus]
@@ -143,53 +145,29 @@ redirect_stderr=true
 stdout_logfile=/var/log/ci4_bus.log
 ```
 
-Reload Supervisor:
+Reload:
 
 ```
 supervisorctl reread
 supervisorctl update
 ```
 
-### Windows Service (NSSM)
+### Windows (NSSM)
 
 ```
 nssm install CI4BusWorker
 ```
 
-Set:
-
-```
-Application: C:\xampp\php\php.exe
-Arguments: spark bus:work
-```
-
 ## ❌ Failed Job Management
-
-### List failed jobs
 
 ```
 php spark bus:failed
-```
-
-### Retry a single job
-
-```
 php spark bus:failed:retry 12
-```
-
-### Retry all failed jobs
-
-```
 php spark bus:retry-all
-```
-
-### Clear failed jobs
-
-```
 php spark bus:failed:clear
 ```
 
-## 🧹 Clearing Pending Jobs
+## 🧹 Clearing Jobs
 
 ```
 php spark bus:clear
@@ -197,27 +175,21 @@ php spark bus:clear
 
 ## 📁 Folder Structure
 
+Because the package is now installed via Composer, the core lives in:
+
 ```
-app/
- ├ Commands/
- │    ├ BusWork.php
- │    ├ BusClear.php
- │    ├ BusFailed.php
- │    ├ BusFailedRetry.php
- │    ├ BusRetryAll.php
- │    └ BusMake.php
- ├ Config/
- │    └ Bus.php
- ├ Jobs/
- │    ├ JobInterface.php
- │    ├ BaseJob.php
- │    └ ...
- ├ Libraries/
- │    └ Bus.php
- ├ Models/
- │    ├ JobModel.php
- │    └ FailedJobModel.php
+vendor/humolot/ci4-bus/src
 ```
+
+Your application files remain in:
+
+```
+app/Jobs/
+app/Config/Bus.php
+app/Models/
+app/Libraries/Bus.php (auto-published)
+```
+
 ## 📜 License
 
 MIT License.
