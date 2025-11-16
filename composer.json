@@ -1,0 +1,46 @@
+{
+    "name": "humolot/ci4-bus",
+    "description": "A full-featured asynchronous Job Bus for CodeIgniter 4 (Queue Worker, Failed Jobs, Delays, Retries, PM2/Supervisor-ready).",
+    "keywords": [
+        "codeigniter4",
+        "queue",
+        "bus",
+        "jobs",
+        "async",
+        "background worker",
+        "horizon",
+        "ci4"
+    ],
+    "type": "library",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Humolot",
+            "email": "websoft4you@gmail.com",
+            "homepage": "https://github.com/humolot"
+        }
+    ],
+    "require": {
+        "php": ">=8.0",
+        "codeigniter4/framework": "^4.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "Humolot\\Bus\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Humolot\\Bus\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "codeigniter4": {
+            "discover": [
+                "Commands"
+            ]
+        }
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
